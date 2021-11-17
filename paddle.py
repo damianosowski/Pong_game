@@ -9,19 +9,19 @@ class Paddle(Turtle):
 
     def __init__(self, side):
         super().__init__()
-        self.paddle = Turtle(shape="square")
-        self.paddle.resizemode("user")
-        self.paddle.turtlesize(stretch_len=5)
-        self.paddle.color("white")
-        self.paddle.penup()
+        self.resizemode("user")
+        self.shape("square")
+        self.turtlesize(stretch_len=5)
+        self.color("white")
+        self.penup()
         if side == "left":
-            self.paddle.goto(-PADDLE_POSITION, 0)
+            self.goto(-PADDLE_POSITION, 0)
         elif side == 'right':
-            self.paddle.goto(PADDLE_POSITION, 0)
-        self.paddle.setheading(UP)
+            self.goto(PADDLE_POSITION, 0)
+        self.setheading(UP)
 
     def move_up(self):
-        self.paddle.forward(MOVE_DISTANCE)
+        self.forward(MOVE_DISTANCE)
 
     def move_down(self):
-        self.paddle.backward(MOVE_DISTANCE)
+        self.backward(MOVE_DISTANCE)
