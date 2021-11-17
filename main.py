@@ -10,8 +10,8 @@ screen.bgcolor("black")
 screen.title("Pong Game")
 screen.tracer(0)
 
-paddle_left = Paddle("left")
-paddle_right = Paddle("right")
+paddle_left = Paddle((-350, 0))
+paddle_right = Paddle((350, 0))
 
 centre_line = Turtle(shape="square")
 centre_line.color("white")
