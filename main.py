@@ -1,5 +1,8 @@
+import time
 from turtle import Screen, Turtle
 from paddle import Paddle
+from ball import Ball
+from score import Scoreboard
 
 SCREEN_WIDTH = 800
 SCREEN_HIGH = 600
@@ -12,6 +15,9 @@ screen.tracer(0)
 
 paddle_left = Paddle((-350, 0))
 paddle_right = Paddle((350, 0))
+ball = Ball()
+l_score = Scoreboard((-50, 250))
+r_score = Scoreboard((50, 250))
 
 centre_line = Turtle(shape="square")
 centre_line.color("white")
@@ -34,7 +40,27 @@ screen.onkey(paddle_left.move_up, "w")
 screen.onkey(paddle_left.move_down, "s")
 
 is_game_on = True
+
 while is_game_on:
+    time.sleep(ball.move_speed)
     screen.update()
+    ball.move()
+
+    # detect collision with wall
+    if ball.ycor() > 280 or ball.ycor() < -280:
+        ball.bounce_y()
+
+    # detect collision with paddles
+    if ball.xcor() > 320 and ball.distance(paddle_right) < 50 or ball.xcor() < -320 and ball.distance(paddle_left) < 50:
+        ball.bounce_x()
+
+    # detecting put of band
+    if ball.xcor() > 380:
+        ball.reset_position()
+        l_score.increase_score()
+
+    if ball.xcor() < -380:
+        ball.reset_position()
+        r_score.increase_score()
 
 screen.exitonclick()
